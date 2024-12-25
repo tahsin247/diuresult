@@ -61,139 +61,162 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>DIU Semester Result Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* General Styles */
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(45deg, #00897B, #0081bf);
-            color: #333;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .header img {
-            width: 100px;
-            margin-bottom: 20px;
-        }
+    /* General Styles */
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(45deg, #00897B, #0081bf);
+        color: #333;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .header img {
+        width: 100px;
+        margin-bottom: 15px;
+    }
+    .header h1 {
+        font-size: 1.8rem;
+        color: #333;
+    }
+    .form-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 0 10px;
+    }
+    .form-section form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        width: 100%;
+    }
+    .form-section input, .form-section select {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 300px;
+    }
+    .form-section button {
+        background: #2575fc;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        width: 100%;
+        max-width: 150px;
+    }
+    .form-section button:hover {
+        background: #6a11cb;
+    }
+    .error {
+        text-align: center;
+        color: red;
+        margin-bottom: 10px;
+        padding: 0 10px;
+    }
+    .result-section h2 {
+        text-align: center;
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 10px;
+    }
+    .result-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0 auto;
+        overflow-x: auto;
+    }
+    .result-table th, .result-table td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+    .result-table th {
+        background: #6a11cb;
+        color: white;
+    }
+    .result-table tbody tr:nth-child(even) {
+        background: #f9f9f9;
+    }
+    .sgpa-section {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333;
+    }
+    .print-button {
+        display: block;
+        margin: 20px auto;
+        background: #2575fc;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        width: 100%;
+        max-width: 150px;
+    }
+    .print-button:hover {
+        background: #6a11cb;
+    }
+
+    /* Responsive Styles */
+    @media screen and (max-width: 768px) {
         .header h1 {
-            font-size: 2.2rem;
-            color: #333;
+            font-size: 1.5rem;
         }
-        .form-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        .form-section form {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 100%;
-            max-width: 600px;
+        .result-table th, .result-table td {
+            padding: 8px;
+            font-size: 0.9rem;
         }
         .form-section input, .form-section select {
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            width: 250px;
+            width: 100%;
             max-width: 100%;
         }
         .form-section button {
-            background: #2575fc;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        .form-section button:hover {
-            background: #6a11cb;
-        }
-        .error {
-            text-align: center;
-            color: red;
-            margin-bottom: 20px;
+            max-width: 100%;
         }
         .result-section h2 {
-            text-align: center;
-            font-size: 1.8rem;
-            color: #333;
-            margin-bottom: 15px;
-        }
-        .result-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0 auto;
-        }
-        .result-table th, .result-table td {
-            padding: 12px;
-            text-align: center;
-            border: 1px solid #ddd;
-        }
-        .result-table th {
-            background: #6a11cb;
-            color: white;
-        }
-        .result-table tbody tr:nth-child(even) {
-            background: #f9f9f9;
-        }
-        .sgpa-section {
-            text-align: center;
-            margin-top: 15px;
             font-size: 1.2rem;
-            font-weight: bold;
-            color: #333;
+        }
+    }
+
+    /* Print Styles */
+    @media print {
+        body {
+            background: white;
+            color: black;
+        }
+        .container {
+            border: none;
+            box-shadow: none;
         }
         .print-button {
-            display: block;
-            margin: 20px auto;
-            background: #2575fc;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s ease;
+            display: none;
         }
-        .print-button:hover {
-            background: #6a11cb;
-        }
-
-        /* Print Styles */
-        @media print {
-            body {
-                background: white;
-                color: black;
-            }
-            .container {
-                border: none;
-                box-shadow: none;
-            }
-            .print-button {
-                display: none;
-            }
-            .header img {
-                width: 100px;
-                margin-bottom: 20px;
-            }
-        }
-    </style>
+    }
+</style>
     <script>
         function printResults() {
             window.print();
