@@ -7,10 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate input fields
     if (empty($studentId) || empty($semesterId)) {
-        $error = "Please provide both Student ID and Semester ID.";
+        $error = "Please provide both Student ID and Semester.";
     } else {
         // API URL
-        $apiUrl = "https://diuresult.onrender.com/diuapi.php/?studentId=$studentId&semesterId=$semesterId";
+        $apiUrl = "http://localhost/diuapi.php/?studentId=$studentId&semesterId=$semesterId";
 
         // Fetch data from the API
         $response = file_get_contents($apiUrl);
@@ -56,12 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #00897B, #0072bc);
+            background: linear-gradient(45deg, #00897B, #0081bf);
             color: #333;
         }
         .container {
             max-width: 1200px;
-            margin: 20px auto;
+            margin: 50px auto;
             padding: 20px;
             background: #fff;
             border-radius: 12px;
@@ -74,29 +74,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .header h1 {
             font-size: 2.5rem;
             color: #333;
-            line-height: 1.4;
         }
-        .instructions {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1rem;
-            color: #555;
-        }
+        /* Form Section */
         .form-section {
+            display: flex;
+            justify-content: center;
             margin-bottom: 30px;
-            padding: 15px;
+            flex-wrap: wrap;
         }
         .form-section form {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
             gap: 15px;
+            justify-content: center;
+            width: 100%;
         }
         .form-section input, .form-section select {
-            padding: 10px;
+            padding: 12px 15px;
             border: 1px solid #ddd;
             border-radius: 8px;
             font-size: 1rem;
-            width: 100%;
+            width: calc(100% - 40px);
+            max-width: 300px;
         }
         .form-section button {
             background: #2575fc;
@@ -106,11 +105,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.3s ease;
         }
         .form-section button:hover {
-            background: #0056b3;
+            background: #6a11cb;
         }
+        /* Error Message */
         .error {
             text-align: center;
             color: red;
@@ -118,7 +118,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         .result-section {
             margin-top: 20px;
-            padding: 15px;
         }
         .result-section h2 {
             text-align: center;
@@ -126,21 +125,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: #333;
             margin-bottom: 15px;
         }
-
-        /* Table Styles */
-        .table-wrapper {
-            overflow-x: auto;
-        }
         .result-table {
             width: 100%;
             border-collapse: collapse;
             margin: 0 auto;
         }
         .result-table th, .result-table td {
-            padding: 12px;
+            padding: 15px;
             text-align: center;
             border: 1px solid #ddd;
-            font-size: 0.95rem;
         }
         .result-table th {
             background: #6a11cb;
@@ -156,46 +149,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-weight: bold;
             color: #333;
         }
-
         /* Footer */
         .footer {
             text-align: center;
             margin-top: 50px;
-            color: #fff;
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8rem;
-            }
-            .result-table th, .result-table td {
-                font-size: 0.85rem;
-                padding: 10px;
-            }
-            .sgpa-section {
-                font-size: 1rem;
-            }
-        }
-        @media (max-width: 576px) {
-            .form-section {
-                padding: 10px;
-            }
-            .result-table th, .result-table td {
-                font-size: 0.8rem;
-                padding: 8px;
-            }
-            .sgpa-section {
-                font-size: 0.9rem;
-            }
+            color: #f9f9f9;
         }
     </style>
-    <script>
-        function printResults() {
-            window.print();
-        }
-    </script>
 </head>
 <body>
 
@@ -204,18 +164,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h1>DIU Semester Result Portal</h1>
         </div>
 
-        <div class="instructions">
-            <p>Enter your Student ID and select a semester option to view your results.</p>
-        </div>
-
         <div class="form-section">
             <form method="POST">
                 <input type="text" name="studentId" placeholder="Enter Student ID" required>
                 <select name="semesterId" required>
                     <option value="">Select Semester</option>
-                    <option value="233">Fall 2023</option>
-                    <option value="241">Spring 2024</option>
                     <option value="243">Fall 2024</option>
+                    <option value="241">Spring 2024</option>
+                    <option value="233">Fall 2023</option>
                 </select>
                 <button type="submit">Get Result</button>
             </form>
@@ -243,40 +199,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if (isset($semesterResults) && !empty($semesterResults)): ?>
             <div class="result-section">
                 <h2>Semester Results</h2>
-                <div class="table-wrapper">
-                    <table class="result-table">
-                        <thead>
+                <table class="result-table">
+                    <thead>
+                        <tr>
+                            <th>Course Code</th>
+                            <th>Course Title</th>
+                            <th>Credit</th>
+                            <th>Grade</th>
+                            <th>Grade Point</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($semesterResults as $result): ?>
                             <tr>
-                                <th>Course Code</th>
-                                <th>Course Title</th>
-                                <th>Credit</th>
-                                <th>Grade</th>
-                                <th>Grade Point</th>
+                                <td><?= htmlspecialchars($result['customCourseId']) ?></td>
+                                <td><?= htmlspecialchars($result['courseTitle']) ?></td>
+                                <td><?= htmlspecialchars($result['totalCredit']) ?></td>
+                                <td><?= htmlspecialchars($result['gradeLetter']) ?></td>
+                                <td><?= htmlspecialchars($result['pointEquivalent']) ?></td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($semesterResults as $result): ?>
-                                <tr>
-                                    <td><?= htmlspecialchars($result['customCourseId']) ?></td>
-                                    <td><?= htmlspecialchars($result['courseTitle']) ?></td>
-                                    <td><?= htmlspecialchars($result['totalCredit']) ?></td>
-                                    <td><?= htmlspecialchars($result['gradeLetter']) ?></td>
-                                    <td><?= htmlspecialchars($result['pointEquivalent']) ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
                 <div class="sgpa-section">SGPA: <?= isset($sgpa) ? $sgpa : 'N/A' ?></div>
-            </div>
-            <div class="result-section" style="text-align: center; margin-top: 20px;">
-                <button onclick="printResults()" style="background: #2575fc; color: white; padding: 12px 20px; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;">Print Results</button>
             </div>
         <?php endif; ?>
     </div>
 
     <div class="footer">
-        &copy; <?= date('Y') ?> Developed by Montu | All Rights Reserved.
+        &copy; <?= date('Y') ?> Montu | All rights reserved.
     </div>
 
 </body>
