@@ -1,5 +1,12 @@
 <?php
 
+// Map semester IDs to names
+$semesterMap = [
+    "243" => "Fall 2024",
+    "241" => "Spring 2024",
+    "233" => "Fall 2023",
+];
+
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $studentId = htmlspecialchars(trim($_POST['studentId']));
@@ -9,6 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($studentId) || empty($semesterId)) {
         $error = "Please provide both Student ID and Semester.";
     } else {
+        // Get semester name based on the selected semesterId
+        $semesterName = $semesterMap[$semesterId] ?? 'Unknown Semester';
+
         // API URL
         $apiUrl = "http://localhost/diuapi.php/?studentId=$studentId&semesterId=$semesterId";
 
@@ -174,22 +184,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             .container {
                 border: none;
                 box-shadow: none;
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                height: 100%;
-                page-break-inside: avoid;
+            }
+            .print-button {
+                display: none;
             }
             .header img {
                 width: 100px;
                 margin-bottom: 20px;
-            }
-            .print-button, .form-section {
-                display: none;
-            }
-            @page {
-                size: A4;
-                margin: 20mm;
             }
         }
     </style>
@@ -235,7 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <tr><th>Department</th><td><?= htmlspecialchars($studentInfo['departmentName']) ?></td></tr>
                     <tr><th>Batch</th><td><?= htmlspecialchars($studentInfo['batchNo']) ?></td></tr>
                     <tr><th>Faculty</th><td><?= htmlspecialchars($studentInfo['facultyName']) ?></td></tr>
-                    <tr><th>Semester</th><td><?= htmlspecialchars($studentInfo['semesterName']) ?></td></tr>
+                    <tr><th>Semester</th><td><?= htmlspecialchars($semesterName) ?></td></tr>
                 </table>
             </div>
         <?php endif; ?>
@@ -273,3 +274,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </body>
 </html>
+
