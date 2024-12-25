@@ -71,53 +71,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             text-align: center;
             margin-bottom: 30px;
         }
+        .header img {
+            width: 100px;
+            margin-bottom: 20px;
+        }
         .header h1 {
             font-size: 2.5rem;
             color: #333;
-        }
-        /* Form Section */
-        .form-section {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-        .form-section form {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            width: 100%;
-        }
-        .form-section input, .form-section select {
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            width: calc(100% - 40px);
-            max-width: 300px;
-        }
-        .form-section button {
-            background: #2575fc;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        .form-section button:hover {
-            background: #6a11cb;
-        }
-        /* Error Message */
-        .error {
-            text-align: center;
-            color: red;
-            margin-bottom: 20px;
-        }
-        .result-section {
-            margin-top: 20px;
         }
         .result-section h2 {
             text-align: center;
@@ -149,18 +109,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-weight: bold;
             color: #333;
         }
-        /* Footer */
-        .footer {
+        .print-button {
+            display: block;
+            margin: 20px auto;
+            background: #2575fc;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
             text-align: center;
-            margin-top: 50px;
-            color: #f9f9f9;
+            transition: background 0.3s ease;
+            width: 150px;
+        }
+        .print-button:hover {
+            background: #6a11cb;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            .container {
+                border: none;
+                box-shadow: none;
+            }
+            .print-button {
+                display: none;
+            }
+            .header img {
+                width: 100px;
+                margin-bottom: 20px;
+            }
         }
     </style>
+    <script>
+        function printResults() {
+            window.print();
+        }
+    </script>
 </head>
 <body>
 
     <div class="container">
         <div class="header">
+            <!-- DIU Logo -->
+            <img src="https://upload.wikimedia.org/wikipedia/en/6/68/DIU_logo.png" alt="DIU Logo">
             <h1>DIU Semester Result Portal</h1>
         </div>
 
@@ -178,7 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <?php if (isset($error)): ?>
-            <p class="error"><?= $error ?></p>
+            <p class="error" style="text-align: center; color: red;"><?= $error ?></p>
         <?php endif; ?>
 
         <?php if (isset($studentInfo) && !empty($studentInfo)): ?>
@@ -223,11 +220,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </table>
                 <div class="sgpa-section">SGPA: <?= isset($sgpa) ? $sgpa : 'N/A' ?></div>
             </div>
+            <!-- Print Button -->
+            <button class="print-button" onclick="printResults()">Print Results</button>
         <?php endif; ?>
-    </div>
-
-    <div class="footer">
-        &copy; <?= date('Y') ?> Montu | All rights reserved.
     </div>
 
 </body>
