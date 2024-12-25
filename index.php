@@ -56,12 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(45deg, #00897B, #0081bf);
+            background: linear-gradient(135deg, #00897B, #0072bc);
             color: #333;
         }
         .container {
             max-width: 1200px;
-            margin: 50px auto;
+            margin: 20px auto;
             padding: 20px;
             background: #fff;
             border-radius: 12px;
@@ -74,28 +74,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .header h1 {
             font-size: 2.5rem;
             color: #333;
+            line-height: 1.4;
         }
         .form-section {
-            display: flex;
-            justify-content: center;
             margin-bottom: 30px;
+            padding: 15px;
         }
         .form-section form {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 15px;
         }
-        .form-section input {
+        .form-section input, .form-section select {
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 8px;
             font-size: 1rem;
-            width: 300px;
+            width: 100%;
         }
         .form-section button {
             background: #2575fc;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border: none;
             border-radius: 8px;
             font-size: 1rem;
@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             transition: background 0.3s;
         }
         .form-section button:hover {
-            background: #6a11cb;
+            background: #0056b3;
         }
         .error {
             text-align: center;
@@ -112,6 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         .result-section {
             margin-top: 20px;
+            padding: 15px;
         }
         .result-section h2 {
             text-align: center;
@@ -122,18 +123,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         /* Table Styles */
         .table-wrapper {
-            overflow-x: auto; /* Enable horizontal scrolling on mobile */
+            overflow-x: auto;
         }
         .result-table {
             width: 100%;
             border-collapse: collapse;
             margin: 0 auto;
-            min-width: 600px;
         }
         .result-table th, .result-table td {
-            padding: 15px;
+            padding: 12px;
             text-align: center;
             border: 1px solid #ddd;
+            font-size: 0.95rem;
         }
         .result-table th {
             background: #6a11cb;
@@ -143,27 +144,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background: #f9f9f9;
         }
         .sgpa-section {
-            text-align: right;
+            text-align: center;
             margin-top: 15px;
             font-size: 1.2rem;
             font-weight: bold;
+            color: #333;
         }
 
         /* Footer */
         .footer {
             text-align: center;
             margin-top: 50px;
-            color: #f9f9f9;
+            color: #fff;
+            font-size: 0.9rem;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .form-section input {
-                width: 100%; /* Full-width inputs on smaller screens */
+            .header h1 {
+                font-size: 1.8rem;
             }
             .result-table th, .result-table td {
-                font-size: 0.9rem; /* Adjust font size for smaller screens */
+                font-size: 0.85rem;
                 padding: 10px;
+            }
+            .sgpa-section {
+                font-size: 1rem;
+            }
+        }
+        @media (max-width: 576px) {
+            .form-section {
+                padding: 10px;
+            }
+            .result-table th, .result-table td {
+                font-size: 0.8rem;
+                padding: 8px;
+            }
+            .sgpa-section {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -178,7 +196,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="form-section">
             <form method="POST">
                 <input type="text" name="studentId" placeholder="Enter Student ID" required>
-                <input type="text" name="semesterId" placeholder="Enter Semester ID" required>
+                <select name="semesterId" required>
+                    <option value="">Select Semester</option>
+                    <option value="233">Fall 2023</option>
+                    <option value="241">Spring 2024</option>
+                    <option value="243">Fall 2024</option>
+                </select>
                 <button type="submit">Get Result</button>
             </form>
         </div>
@@ -235,7 +258,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <div class="footer">
-        &copy; <?= date('Y') ?> Montu | All rights reserved.
+        &copy; <?= date('Y') ?> DIU Result Portal | All Rights Reserved.
     </div>
 
 </body>
