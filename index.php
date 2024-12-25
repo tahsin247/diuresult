@@ -1,48 +1,3 @@
-<?php
-
-// Check if the form is submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $studentId = htmlspecialchars(trim($_POST['studentId']));
-    $semesterId = htmlspecialchars(trim($_POST['semesterId']));
-
-    // Validate input fields
-    if (empty($studentId) || empty($semesterId)) {
-        $error = "Please provide both Student ID and Semester ID.";
-    } else {
-        // API URL
-        $apiUrl = "https://diuresult.onrender.com/diuapi.php/?studentId=$studentId&semesterId=$semesterId";
-
-        // Fetch data from the API
-        $response = file_get_contents($apiUrl);
-        if ($response === false) {
-            $error = "Failed to connect to the API. Please check the server.";
-        } else {
-            // Decode the JSON response
-            $data = json_decode($response, true);
-            if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
-                $error = "Error decoding API response: " . json_last_error_msg();
-            } else {
-                $studentInfo = $data['studentInfo'] ?? [];
-                $semesterResults = $data['semesterResult'] ?? [];
-
-                // Calculate SGPA
-                $totalCredits = 0;
-                $totalGradePoints = 0;
-
-                foreach ($semesterResults as $result) {
-                    $credit = $result['totalCredit'];
-                    $gradePoint = $result['pointEquivalent'];
-                    $totalCredits += $credit;
-                    $totalGradePoints += $credit * $gradePoint;
-                }
-
-                $sgpa = $totalCredits > 0 ? round($totalGradePoints / $totalCredits, 2) : 0;
-            }
-        }
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,6 +30,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: 2.5rem;
             color: #333;
             line-height: 1.4;
+        }
+        .instructions {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            color: #555;
         }
         .form-section {
             margin-bottom: 30px;
@@ -185,12 +146,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     </style>
+    <script>
+        function printResults() {
+            window.print();
+        }
+    </script>
 </head>
 <body>
 
     <div class="container">
         <div class="header">
             <h1>DIU Semester Result Portal</h1>
+        </div>
+
+        <div class="instructions">
+            <p>Enter your Student ID and select a semester option to view your results.</p>
         </div>
 
         <div class="form-section">
@@ -253,6 +223,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </table>
                 </div>
                 <div class="sgpa-section">SGPA: <?= isset($sgpa) ? $sgpa : 'N/A' ?></div>
+            </div>
+            <div class="result-section" style="text-align: center; margin-top: 20px;">
+                <button onclick="printResults()" style="background: #2575fc; color: white; padding: 12px 20px; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;">Print Results</button>
             </div>
         <?php endif; ?>
     </div>
