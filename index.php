@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             text-align: center;
             margin-top: 30px;
             font-size: 0.9rem;
-            color: #fdfdfd;
+            color: #fff;
         }
 
         /* Print Styles */
