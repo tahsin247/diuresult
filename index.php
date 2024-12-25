@@ -7,10 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate input fields
     if (empty($studentId) || empty($semesterId)) {
-        $error = "Please provide both Student ID and Semester.";
+        $error = "Please provide both Student ID and Semester ID.";
     } else {
         // API URL
-        $apiUrl = "http://localhost/diuapi.php/?studentId=$studentId&semesterId=$semesterId";
+        $apiUrl = "https://diuresult.onrender.com/diuapi.php/?studentId=$studentId&semesterId=$semesterId";
 
         // Fetch data from the API
         $response = file_get_contents($apiUrl);
@@ -75,42 +75,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-size: 2.5rem;
             color: #333;
         }
-        /* Form Section */
         .form-section {
             display: flex;
             justify-content: center;
             margin-bottom: 30px;
-            flex-wrap: wrap;
         }
         .form-section form {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
-            justify-content: center;
-            width: 100%;
         }
-        .form-section input, .form-section select {
-            padding: 12px 15px;
+        .form-section input {
+            padding: 10px;
             border: 1px solid #ddd;
             border-radius: 8px;
             font-size: 1rem;
-            width: calc(100% - 40px);
-            max-width: 300px;
+            width: 300px;
         }
         .form-section button {
             background: #2575fc;
             color: white;
-            padding: 12px 20px;
+            padding: 10px 20px;
             border: none;
             border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: background 0.3s;
         }
         .form-section button:hover {
             background: #6a11cb;
         }
-        /* Error Message */
         .error {
             text-align: center;
             color: red;
@@ -125,10 +119,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: #333;
             margin-bottom: 15px;
         }
+
+        /* Table Styles */
+        .table-wrapper {
+            overflow-x: auto; /* Enable horizontal scrolling on mobile */
+        }
         .result-table {
             width: 100%;
             border-collapse: collapse;
             margin: 0 auto;
+            min-width: 600px;
         }
         .result-table th, .result-table td {
             padding: 15px;
@@ -143,17 +143,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background: #f9f9f9;
         }
         .sgpa-section {
-            text-align: center;
+            text-align: right;
             margin-top: 15px;
             font-size: 1.2rem;
             font-weight: bold;
-            color: #333;
         }
+
         /* Footer */
         .footer {
             text-align: center;
             margin-top: 50px;
             color: #f9f9f9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-section input {
+                width: 100%; /* Full-width inputs on smaller screens */
+            }
+            .result-table th, .result-table td {
+                font-size: 0.9rem; /* Adjust font size for smaller screens */
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -167,12 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="form-section">
             <form method="POST">
                 <input type="text" name="studentId" placeholder="Enter Student ID" required>
-                <select name="semesterId" required>
-                    <option value="">Select Semester</option>
-                    <option value="243">Fall 2024</option>
-                    <option value="241">Spring 2024</option>
-                    <option value="233">Fall 2023</option>
-                </select>
+                <input type="text" name="semesterId" placeholder="Enter Semester ID" required>
                 <button type="submit">Get Result</button>
             </form>
         </div>
@@ -199,28 +205,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if (isset($semesterResults) && !empty($semesterResults)): ?>
             <div class="result-section">
                 <h2>Semester Results</h2>
-                <table class="result-table">
-                    <thead>
-                        <tr>
-                            <th>Course Code</th>
-                            <th>Course Title</th>
-                            <th>Credit</th>
-                            <th>Grade</th>
-                            <th>Grade Point</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($semesterResults as $result): ?>
+                <div class="table-wrapper">
+                    <table class="result-table">
+                        <thead>
                             <tr>
-                                <td><?= htmlspecialchars($result['customCourseId']) ?></td>
-                                <td><?= htmlspecialchars($result['courseTitle']) ?></td>
-                                <td><?= htmlspecialchars($result['totalCredit']) ?></td>
-                                <td><?= htmlspecialchars($result['gradeLetter']) ?></td>
-                                <td><?= htmlspecialchars($result['pointEquivalent']) ?></td>
+                                <th>Course Code</th>
+                                <th>Course Title</th>
+                                <th>Credit</th>
+                                <th>Grade</th>
+                                <th>Grade Point</th>
                             </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($semesterResults as $result): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($result['customCourseId']) ?></td>
+                                    <td><?= htmlspecialchars($result['courseTitle']) ?></td>
+                                    <td><?= htmlspecialchars($result['totalCredit']) ?></td>
+                                    <td><?= htmlspecialchars($result['gradeLetter']) ?></td>
+                                    <td><?= htmlspecialchars($result['pointEquivalent']) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
                 <div class="sgpa-section">SGPA: <?= isset($sgpa) ? $sgpa : 'N/A' ?></div>
             </div>
         <?php endif; ?>
