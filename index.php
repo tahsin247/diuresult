@@ -1,3 +1,48 @@
+<?php
+
+// Check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $studentId = htmlspecialchars(trim($_POST['studentId']));
+    $semesterId = htmlspecialchars(trim($_POST['semesterId']));
+
+    // Validate input fields
+    if (empty($studentId) || empty($semesterId)) {
+        $error = "Please provide both Student ID and Semester ID.";
+    } else {
+        // API URL
+        $apiUrl = "https://diuresult.onrender.com/diuapi.php/?studentId=$studentId&semesterId=$semesterId";
+
+        // Fetch data from the API
+        $response = file_get_contents($apiUrl);
+        if ($response === false) {
+            $error = "Failed to connect to the API. Please check the server.";
+        } else {
+            // Decode the JSON response
+            $data = json_decode($response, true);
+            if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
+                $error = "Error decoding API response: " . json_last_error_msg();
+            } else {
+                $studentInfo = $data['studentInfo'] ?? [];
+                $semesterResults = $data['semesterResult'] ?? [];
+
+                // Calculate SGPA
+                $totalCredits = 0;
+                $totalGradePoints = 0;
+
+                foreach ($semesterResults as $result) {
+                    $credit = $result['totalCredit'];
+                    $gradePoint = $result['pointEquivalent'];
+                    $totalCredits += $credit;
+                    $totalGradePoints += $credit * $gradePoint;
+                }
+
+                $sgpa = $totalCredits > 0 ? round($totalGradePoints / $totalCredits, 2) : 0;
+            }
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -231,7 +276,7 @@
     </div>
 
     <div class="footer">
-        &copy; <?= date('Y') ?> DIU Result Portal | All Rights Reserved.
+        &copy; <?= date('Y') ?> Developed by Montu | All Rights Reserved.
     </div>
 
 </body>
