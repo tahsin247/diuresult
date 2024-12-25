@@ -153,6 +153,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background: #6a11cb;
         }
 
+        /* Footer Styles */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
         /* Print Styles */
         @media print {
             body {
@@ -167,14 +175,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 width: 100%;
                 height: 100%;
             }
-            .form-section, .print-button {
+            .form-section, .print-button, .footer {
                 display: none;
-            }
-            .result-section h2 {
-                font-size: 1.4rem;
-            }
-            .result-table th, .result-table td {
-                font-size: 0.8rem;
             }
             @page {
                 size: A4;
@@ -257,6 +259,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <button class="print-button" onclick="printResults()">Print Results</button>
         <?php endif; ?>
+    </div>
+
+    <div class="footer">
+        &copy; <?= date('Y') ?> Developed by Montu | All rights reserved.
     </div>
 
 </body>
