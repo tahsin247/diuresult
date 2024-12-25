@@ -174,13 +174,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             .container {
                 border: none;
                 box-shadow: none;
-            }
-            .print-button {
-                display: none;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: 100%;
+                page-break-inside: avoid;
             }
             .header img {
                 width: 100px;
                 margin-bottom: 20px;
+            }
+            .print-button, .form-section {
+                display: none;
+            }
+            @page {
+                size: A4;
+                margin: 20mm;
             }
         }
     </style>
