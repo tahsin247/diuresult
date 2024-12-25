@@ -141,38 +141,38 @@ The portal employs a 2-tier architecture:
 1. Clone the repository:
    ```bash
    git clone https://github.com/tahsin247/diuresult.git
-Navigate to the project directory:
-bash
-Copy code
+
+### Navigate to the project directory:
+
 cd diuresult
 Start the server:
-bash
-Copy code
 php -S localhost:8000
-7. User Manual
-Logging In
-Open the URL.
-Enter your ID and the selected semester option.
-Click Submit.
-Viewing Results
-Navigate to the Results page.
-Select your semester from the dropdown.
-Click Submit.
-Downloading Results
-Click the Download PDF button to save your results locally.
-8. Security Features
-Encryption
-Passwords are hashed using bcrypt.
-Data transmitted over HTTPS.
-Role-Based Access Control
-Admin, Faculty, and Students have clearly defined access privileges.
-9. FAQs
-How do I export results?
-Use the Print button on the results page.
-10. Conclusion
-Future Scope
-Mobile application integration.
-Real-time notifications for result updates.
-Acknowledgments
-DEVELOPED BY THE SWE 41 SOFT MAFIA.
 
+
+
+## 7. User Manual
+Logging In
+- Open the URL.
+- Enter your ID and the selected semester option.
+- Click Submit.
+Viewing Results
+- Navigate to the Results page.
+- Select your semester from the dropdown.
+- Click Submit.
+## Downloading Results
+- Click the Download PDF button to save your results locally.
+## 8. Security Features
+- Encryption
+- Passwords are hashed using bcrypt.
+- Data transmitted over HTTPS.
+- Role-Based Access Control
+Admin, Faculty, and Students have clearly defined access privileges.
+## 9. FAQs
+- How do I export results?
+- Use the Print button on the results page.
+- 10. Conclusion
+- Future Scope
+- Mobile application integration.
+- Real-time notifications for result updates.
+- Acknowledgments
+   ## DEVELOPED BY THE SWE 41 SOFT MAFIA.
