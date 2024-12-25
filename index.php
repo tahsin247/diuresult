@@ -202,6 +202,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+	 /* Footer Styles */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #fdfdfd;
+		}
+
     /* Print Styles */
     @media print {
         body {
@@ -295,6 +303,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
     </div>
 
+	 <div class="footer">
+        &copy; <?= date('Y') ?> Developed by Montu | All rights reserved.
+    </div>
+	
 </body>
 </html>
-
