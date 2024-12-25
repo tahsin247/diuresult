@@ -60,8 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: #333;
         }
         .container {
-            max-width: 1200px;
-            margin: 50px auto;
+            max-width: 800px;
+            margin: 20px auto;
             padding: 20px;
             background: #fff;
             border-radius: 12px;
@@ -69,47 +69,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         .header {
             text-align: center;
-            margin-bottom: 30px;
-        }
-        .header img {
-            width: 100px;
             margin-bottom: 20px;
         }
+        .header img {
+            width: 80px;
+            margin-bottom: 10px;
+        }
         .header h1 {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             color: #333;
         }
         .form-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 30px;
+            text-align: center;
+            margin-bottom: 20px;
         }
         .form-section form {
-            display: flex;
-            gap: 15px;
+            display: inline-flex;
+            gap: 10px;
             flex-wrap: wrap;
-            justify-content: center;
-            width: 100%;
-            max-width: 600px;
         }
         .form-section input, .form-section select {
-            padding: 12px;
+            padding: 10px;
             border: 1px solid #ddd;
             border-radius: 8px;
             font-size: 1rem;
-            width: 250px;
-            max-width: 100%;
+            width: 200px;
         }
         .form-section button {
             background: #2575fc;
             color: white;
-            padding: 12px 20px;
+            padding: 10px 15px;
             border: none;
             border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
-            transition: background 0.3s ease;
         }
         .form-section button:hover {
             background: #6a11cb;
@@ -121,45 +114,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         .result-section h2 {
             text-align: center;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #333;
             margin-bottom: 15px;
         }
         .result-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 0 auto;
+            margin-bottom: 20px;
         }
         .result-table th, .result-table td {
-            padding: 12px;
+            padding: 8px;
             text-align: center;
             border: 1px solid #ddd;
+            font-size: 0.9rem;
         }
         .result-table th {
             background: #6a11cb;
             color: white;
         }
-        .result-table tbody tr:nth-child(even) {
-            background: #f9f9f9;
-        }
         .sgpa-section {
             text-align: center;
-            margin-top: 15px;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: bold;
-            color: #333;
         }
         .print-button {
             display: block;
-            margin: 20px auto;
+            margin: 10px auto;
             background: #2575fc;
             color: white;
-            padding: 12px 20px;
+            padding: 8px 15px;
             border: none;
             border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
-            transition: background 0.3s ease;
         }
         .print-button:hover {
             background: #6a11cb;
@@ -178,14 +166,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 padding: 0;
                 width: 100%;
                 height: 100%;
-                page-break-inside: avoid;
             }
-            .header img {
-                width: 100px;
-                margin-bottom: 20px;
-            }
-            .print-button, .form-section {
+            .form-section, .print-button {
                 display: none;
+            }
+            .result-section h2 {
+                font-size: 1.4rem;
+            }
+            .result-table th, .result-table td {
+                font-size: 0.8rem;
             }
             @page {
                 size: A4;
@@ -203,7 +192,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="container">
         <div class="header">
-            <!-- DIU Logo -->
             <img src="https://daffodilvarsity.edu.bd/template/images/diulogoside.png" alt="DIU Logo">
             <h1>DIU Semester Result Portal</h1>
         </div>
