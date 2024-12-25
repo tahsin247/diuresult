@@ -60,8 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             color: #333;
         }
         .container {
-            max-width: 800px;
-            margin: 20px auto;
+            max-width: 1200px;
+            margin: 50px auto;
             padding: 20px;
             background: #fff;
             border-radius: 12px;
@@ -69,40 +69,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         .header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         .header img {
-            width: 80px;
-            margin-bottom: 10px;
+            width: 100px;
+            margin-bottom: 20px;
         }
         .header h1 {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             color: #333;
         }
         .form-section {
-            text-align: center;
-            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
         }
         .form-section form {
-            display: inline-flex;
-            gap: 10px;
+            display: flex;
+            gap: 15px;
             flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 600px;
         }
         .form-section input, .form-section select {
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ddd;
             border-radius: 8px;
             font-size: 1rem;
-            width: 200px;
+            width: 250px;
+            max-width: 100%;
         }
         .form-section button {
             background: #2575fc;
             color: white;
-            padding: 10px 15px;
+            padding: 12px 20px;
             border: none;
             border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
+            transition: background 0.3s ease;
         }
         .form-section button:hover {
             background: #6a11cb;
@@ -114,51 +121,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         .result-section h2 {
             text-align: center;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: #333;
             margin-bottom: 15px;
         }
         .result-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin: 0 auto;
         }
         .result-table th, .result-table td {
-            padding: 8px;
+            padding: 12px;
             text-align: center;
             border: 1px solid #ddd;
-            font-size: 0.9rem;
         }
         .result-table th {
             background: #6a11cb;
             color: white;
         }
+        .result-table tbody tr:nth-child(even) {
+            background: #f9f9f9;
+        }
         .sgpa-section {
             text-align: center;
-            font-size: 1rem;
+            margin-top: 15px;
+            font-size: 1.2rem;
             font-weight: bold;
+            color: #333;
         }
         .print-button {
             display: block;
-            margin: 10px auto;
+            margin: 20px auto;
             background: #2575fc;
             color: white;
-            padding: 8px 15px;
+            padding: 12px 20px;
             border: none;
             border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
+            transition: background 0.3s ease;
         }
         .print-button:hover {
             background: #6a11cb;
-        }
-
-        /* Footer Styles */
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 0.9rem;
-            color: #666;
         }
 
         /* Print Styles */
@@ -174,8 +178,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 padding: 0;
                 width: 100%;
                 height: 100%;
+                page-break-inside: avoid;
             }
-            .form-section, .print-button, .footer {
+            .header img {
+                width: 100px;
+                margin-bottom: 20px;
+            }
+            .print-button, .form-section {
                 display: none;
             }
             @page {
@@ -194,6 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="container">
         <div class="header">
+            <!-- DIU Logo -->
             <img src="https://daffodilvarsity.edu.bd/template/images/diulogoside.png" alt="DIU Logo">
             <h1>DIU Semester Result Portal</h1>
         </div>
@@ -259,10 +269,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <button class="print-button" onclick="printResults()">Print Results</button>
         <?php endif; ?>
-    </div>
-
-    <div class="footer">
-        &copy; <?= date('Y') ?> Developed by Montu | All rights reserved.
     </div>
 
 </body>
