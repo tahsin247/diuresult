@@ -174,5 +174,11 @@ Admin, Faculty, and Students have clearly defined access privileges.
 - Future Scope
 - Mobile application integration.
 - Real-time notifications for result updates.
-- Acknowledgments
+  
+
+- ### Acknowledgments
+1. info:
+   ```bash
    ## DEVELOPED BY THE SWE 41 SOFT MAFIA.
+   Email: hello@hamim.info
+   
