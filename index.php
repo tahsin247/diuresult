@@ -76,8 +76,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-bottom: 20px;
         }
         .header h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: #333;
+        }
+        .form-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .form-section form {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 600px;
+        }
+        .form-section input, .form-section select {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            width: 250px;
+            max-width: 100%;
+        }
+        .form-section button {
+            background: #2575fc;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .form-section button:hover {
+            background: #6a11cb;
+        }
+        .error {
+            text-align: center;
+            color: red;
+            margin-bottom: 20px;
         }
         .result-section h2 {
             text-align: center;
@@ -91,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin: 0 auto;
         }
         .result-table th, .result-table td {
-            padding: 15px;
+            padding: 12px;
             text-align: center;
             border: 1px solid #ddd;
         }
@@ -119,9 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 8px;
             font-size: 1rem;
             cursor: pointer;
-            text-align: center;
             transition: background 0.3s ease;
-            width: 150px;
         }
         .print-button:hover {
             background: #6a11cb;
@@ -157,7 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container">
         <div class="header">
             <!-- DIU Logo -->
-            <img src="https://upload.wikimedia.org/wikipedia/en/6/68/DIU_logo.png" alt="DIU Logo">
+            <img src="https://daffodilvarsity.edu.bd/template/images/diulogoside.png" alt="DIU Logo">
             <h1>DIU Semester Result Portal</h1>
         </div>
 
@@ -175,7 +213,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <?php if (isset($error)): ?>
-            <p class="error" style="text-align: center; color: red;"><?= $error ?></p>
+            <p class="error"><?= $error ?></p>
         <?php endif; ?>
 
         <?php if (isset($studentInfo) && !empty($studentInfo)): ?>
@@ -220,7 +258,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </table>
                 <div class="sgpa-section">SGPA: <?= isset($sgpa) ? $sgpa : 'N/A' ?></div>
             </div>
-            <!-- Print Button -->
             <button class="print-button" onclick="printResults()">Print Results</button>
         <?php endif; ?>
     </div>
