@@ -114,8 +114,8 @@
 
     <!-- Menu Section -->
     <div class="menu">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
+        <a href="index.php">Home</a>
+        <a href="about.php">About</a>
         <a href="#">Contact</a>
     </div>
 
