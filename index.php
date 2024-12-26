@@ -168,14 +168,14 @@
         <div class="box">
             <h2>Find Semester Result</h2>
             <p>Access detailed results of your completed semesters with subject-wise grades.</p>
-            <button onclick="location.href='find_result.html';">Explore</button>
+            <button onclick="location.href='semester_result.php';">Explore</button>
         </div>
 
         <!-- Box 2 -->
         <div class="box">
             <h2>CGPA Calculator</h2>
             <p>Calculate your cumulative GPA easily by selecting completed semesters.</p>
-            <button onclick="location.href='cgpa_calculator.html';">Calculate</button>
+            <button onclick="location.href='totalcgpa.php';">Calculate</button>
         </div>
     </div>
 
