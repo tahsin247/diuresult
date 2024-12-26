@@ -190,7 +190,7 @@
 
     <!-- Footer Section -->
     <div class="footer">
-        &copy; <?= date('Y') ?> Daffodil International University. Developed with by Montu.
+        &copy; <?= date('Y') ?> Daffodil International University. Developed with by Shiro.
     </div>
 </div>
 
