@@ -168,7 +168,7 @@
         <div class="box">
             <h2>Find Semester Result</h2>
             <p>Access detailed results of your completed semesters with subject-wise grades.</p>
-            <button onclick="location.href='semester_result.php';">Explore</button>
+            <button onclick="location.href='semester_result.php';">Find Result</button>
         </div>
 
         <!-- Box 2 -->
