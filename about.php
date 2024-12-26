@@ -135,7 +135,7 @@
         <div class="developer-section">
             <h3>Meet the Developer</h3>
             <p>
-                This portal was proudly developed by <b>Shrio (Tahsin Hamim)</b>. Combining creativity with functionality, 
+                This portal was proudly developed by <b>Tahsin Hamim</b>. Combining creativity with functionality, 
                 the developer has ensured a smooth user experience for all DIU students.
             </p>
         </div>
@@ -143,7 +143,7 @@
 
     <!-- Footer Section -->
     <div class="footer">
-        &copy; <?= date('Y') ?> Daffodil International University. Developed by Montu.
+        &copy; <?= date('Y') ?> Daffodil International University. Developed by Tahsin Hamim.
     </div>
 </div>
 
