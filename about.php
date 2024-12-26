@@ -135,7 +135,7 @@
         <div class="developer-section">
             <h3>Meet the Developer</h3>
             <p>
-                This portal was proudly developed by <b>Montu (Tahsin Hamim)</b>. Combining creativity with functionality, 
+                This portal was proudly developed by <b>Shrio (Tahsin Hamim)</b>. Combining creativity with functionality, 
                 the developer has ensured a smooth user experience for all DIU students.
             </p>
         </div>
