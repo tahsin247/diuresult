@@ -157,7 +157,7 @@
 
     <!-- Menu Section -->
     <div class="menu">
-        <a href="https://diuresult.onrender.com/">Home</a>
+        <a href="index.php">Home</a>
         <a href="about.php">About</a>
         <a href="#">Contact</a>
     </div>
