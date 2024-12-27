@@ -304,7 +304,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
 	 <div class="footer">
-        &copy; <?= date('Y') ?> Developed by Montu | All rights reserved.
+        &copy; <?= date('Y') ?> Developed by Tahsin Hamim | All rights reserved.
     </div>
 	
 </body>
