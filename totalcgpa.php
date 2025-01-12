@@ -386,7 +386,7 @@ h1 {
     <!-- Header Section -->
     <div class="header">
         <img src="https://daffodilvarsity.edu.bd/template/images/diulogoside.png" alt="DIU Logo">
-        <h2>Welcome, <?= $username ?>!</h2>
+        <h2>DIU, GPA Calculator!</h2>
         <form action="logout.php" method="POST">
             <button type="submit" class="logout-button">Logout</button>
         </form>
