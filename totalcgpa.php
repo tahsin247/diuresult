@@ -118,19 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .header img {
             width: 100px;
         }
-        .logout-button {
-            background: #f44336;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            font-size: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        .logout-button:hover {
-            background: #d32f2f;
-        }
+    
      
         .form-section, .result-section {
             padding: 20px;
@@ -387,9 +375,7 @@ h1 {
     <div class="header">
         <img src="https://daffodilvarsity.edu.bd/template/images/diulogoside.png" alt="DIU Logo">
         <h2>DIU, GPA Calculator!</h2>
-        <form action="logout.php" method="POST">
-            <button type="submit" class="logout-button">Logout</button>
-        </form>
+      
     </div>
 
     <!DOCTYPE html>
