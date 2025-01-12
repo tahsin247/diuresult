@@ -1,6 +1,6 @@
 <?php
 // API to fetch semester list
-$semesterApiUrl = "http://diursultv2.onrender.com/apisocket/semesterListapi.php";
+$semesterApiUrl = "https://diuresult.onrender.com/semesterListapi.php";
 $semesterMap = [];
 
 // Fetch semester list from API
